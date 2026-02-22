@@ -70,4 +70,6 @@ nutrition:
 
 5. **Regenerate the index**: Run `python3 generate_index.py` to update the catalog page.
 
-6. **Confirm**: Tell the user the recipe was added and show the file path.
+6. **Commit and push**: Stage the new recipe file, image, and updated index.md. Commit with message "Add recipe: <title>" and push to origin.
+
+7. **Confirm**: Tell the user the recipe was added, show the file path, and note it's been pushed to the site.

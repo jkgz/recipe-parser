@@ -22,6 +22,13 @@ _Use your browser's search (Ctrl+F / Cmd+F) to find recipes by ingredient or nam
 <h2 class="meal-type">Dinner</h2>
 
 <div class="recipe-grid">
+<a class="recipe-card" href="{{ '/recipes/dinner/chicken-chili-verde.html' | relative_url }}">
+  <img src="{{ '/images/chicken-chili-verde.jpg' | relative_url }}" alt="Chicken Chili Verde">
+  <div class="card-body">
+    <h3>Chicken Chili Verde</h3>
+    <span class="card-meta">Dinner &middot; 30 minutes</span>
+  </div>
+</a>
 <a class="recipe-card" href="{{ '/recipes/dinner/slow-cooker-chipotle-honey-chicken-tacos.html' | relative_url }}">
   <img src="{{ '/images/slow-cooker-chipotle-honey-chicken-tacos.jpg' | relative_url }}" alt="Slow Cooker Chipotle-Honey Chicken Tacos">
   <div class="card-body">

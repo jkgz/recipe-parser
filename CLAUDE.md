@@ -24,7 +24,7 @@ Body sections: `## Ingredients` (bulleted list), `## Instructions` (numbered lis
 2. Create a markdown file in the appropriate `recipes/<meal_type>/` folder using the slug as filename
 3. Run `python3 generate_index.py` to rebuild the index page
 
-Use the `/add-recipe` skill to automate this workflow.
+Use the `/add-recipe` command to automate this workflow (parses, creates markdown, regenerates index, commits, and pushes).
 
 ## Meal Types
 - `breakfast`
