@@ -1,9 +1,25 @@
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
+# Dependencies
+/node_modules/
+
+# Environment
+.env*.local
+
+# OS
+.DS_Store
+
+# Python (keep for parse_recipe.py CLI)
+__pycache__/
+*.pyc
+
+# Legacy Jekyll (can remove after cleanup)
 _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
-.DS_Store
-__pycache__/
-*.pyc
 .bundle/
 vendor/

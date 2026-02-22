@@ -10,66 +10,25 @@ The user will provide a recipe URL. Follow these steps:
 
 ## Steps
 
-1. **Parse the recipe**: Run `python3 parse_recipe.py "<url>"` to extract structured recipe data and download the photo to `images/`.
+1. **Parse the recipe**: Run `python3 parse_recipe.py "<url>"` to get structured JSON data and confirm it has a title, ingredients, and instructions. If the parser fails (no JSON-LD found), manually extract the recipe data from the page using WebFetch.
 
-2. **Review the output**: Check that the JSON output has a title, ingredients, and instructions. If the parser fails (no JSON-LD found), manually extract the recipe data from the page using WebFetch.
-
-3. **Determine meal type**: Ask the user which category if unclear, otherwise infer from the recipe:
+2. **Determine meal type**: Ask the user which category if unclear, otherwise infer from the recipe:
    - `breakfast` — morning meals, brunch items, overnight oats, etc.
    - `dinner` — main courses, soups, stews, etc.
    - `dessert` — sweets, baked goods, etc.
    - `other` — snacks, sides, drinks, sauces, etc.
 
-4. **Create the recipe markdown file**: Save to `recipes/<meal_type>/<slug>.md` using this template:
+3. **Download and upload image**: Use the image URL from the parsed data to download the image, then upload it to Supabase Storage `recipe-images` bucket using the Supabase CLI or a quick script.
 
-```markdown
----
-layout: recipe
-title: "<title>"
-source_url: "<url>"
-image: "/images/<slug>.jpg"
-meal_type: <meal_type>
-prep_time: "<prep_time>"
-cook_time: "<cook_time>"
-total_time: "<total_time>"
-servings: "<servings>"
-calories: <calories_number>
-author: "<author>"
-description: "<description>"
-tags:
-  - <tag1>
-  - <tag2>
-date_added: <today's date YYYY-MM-DD>
-nutrition:
-  calories: "<calories>"
-  fat: "<fat>"
-  carbs: "<carbs>"
-  protein: "<protein>"
-  fiber: "<fiber>"
----
+4. **Insert into Supabase**: Insert the recipe into the `recipes` table with all parsed fields (title, slug, source_url, image_path, meal_type, prep_time, cook_time, total_time, servings, calories, author, description, tags, ingredients, instructions, nutrition).
 
-## Ingredients
+   You can do this via the Supabase CLI or a quick Node script using the service role key:
+   ```bash
+   npx tsx -e "
+   const { createClient } = require('@supabase/supabase-js');
+   const sb = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+   // ... insert logic
+   "
+   ```
 
-- ingredient 1
-- ingredient 2
-...
-
-## Instructions
-
-1. Step one.
-
-2. Step two.
-...
-
-## Nutrition
-
-| Calories | Fat | Carbs | Protein | Fiber |
-|----------|-----|-------|---------|-------|
-| <cal>    | <f> | <c>   | <p>     | <fi>  |
-```
-
-5. **Regenerate the index**: Run `python3 generate_index.py` to update the catalog page.
-
-6. **Commit and push**: Stage the new recipe file, image, and updated index.md. Commit with message "Add recipe: <title>" and push to origin.
-
-7. **Confirm**: Tell the user the recipe was added, show the file path, and note it's been pushed to the site.
+5. **Confirm**: Tell the user the recipe was added and provide the URL path (`/recipe/<slug>`).
