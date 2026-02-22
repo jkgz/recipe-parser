@@ -1,6 +1,6 @@
 title: "Our Family Recipes"
 description: "A personal recipe catalog"
-baseurl: "/RecipeParser"
+baseurl: "/recipe-parser"
 url: ""
 markdown: kramdown
 plugins:
