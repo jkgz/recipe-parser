@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }} — {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="{{ '/' | relative_url }}">&larr; All Recipes</a>
+    </nav>
+  </header>
+  <main class="recipe">
+    <h1>{{ page.title }}</h1>
+
+    {% if page.image %}
+    <img class="recipe-hero" src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+    {% endif %}
+
+    {% if page.description %}
+    <p class="recipe-description">{{ page.description }}</p>
+    {% endif %}
+
+    <div class="recipe-meta">
+      {% if page.prep_time and page.prep_time != "" %}
+        <span class="meta-item"><strong>Prep:</strong> {{ page.prep_time }}</span>
+      {% endif %}
+      {% if page.cook_time and page.cook_time != "" %}
+        <span class="meta-item"><strong>Cook:</strong> {{ page.cook_time }}</span>
+      {% endif %}
+      {% if page.total_time and page.total_time != "" %}
+        <span class="meta-item"><strong>Total:</strong> {{ page.total_time }}</span>
+      {% endif %}
+      {% if page.servings %}
+        <span class="meta-item"><strong>Servings:</strong> {{ page.servings }}</span>
+      {% endif %}
+      {% if page.calories %}
+        <span class="meta-item"><strong>Calories:</strong> {{ page.calories }}</span>
+      {% endif %}
+    </div>
+
+    {% if page.author %}
+    <p class="recipe-author">By {{ page.author }}</p>
+    {% endif %}
+
+    {{ content }}
+
+    {% if page.source_url %}
+    <p class="recipe-source"><a href="{{ page.source_url }}" target="_blank" rel="noopener">View original recipe</a></p>
+    {% endif %}
+  </main>
+  <footer>
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ site.title }}</p>
+  </footer>
+</body>
+</html>

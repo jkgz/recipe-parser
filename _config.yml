@@ -1,0 +1,23 @@
+title: "Our Family Recipes"
+description: "A personal recipe catalog"
+baseurl: "/RecipeParser"
+url: ""
+markdown: kramdown
+plugins:
+  - jekyll-seo-tag
+
+defaults:
+  - scope:
+      path: "recipes"
+      type: "pages"
+    values:
+      layout: "recipe"
+
+exclude:
+  - parse_recipe.py
+  - generate_index.py
+  - README.md
+  - CLAUDE.md
+  - .claude/
+  - Gemfile
+  - Gemfile.lock
